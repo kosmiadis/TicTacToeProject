@@ -1,19 +1,24 @@
 const player1 = Player('Player1', 'X')
 const player2 = Player('Player2', 'O')
+var currentPlayer = player1
+const htmlBoard = document.querySelector('.board')
+    
 
 const Game = () => {
     
     
-    var currentPlayer = player1.playerName
-    const board = document.querySelector('.board')
-    GameBoard.clearBoard(board)
-    GameBoard.updateGameBoard(board)
+    const initializeGame = () => {
+        GameBoard.createBoxes ()
+        GameBoard.clearBoard()
+        
+    }    
+
     const changePlayerOrder = (player1, player2) => {
-        if (currentPlayer == player1.playerName) {
-            currentPlayer = player2.playerName
+        if (currentPlayer == player1) {
+            currentPlayer = player2
         }
-        else if (currentPlayer == player2.playerName) {
-            currentPlayer = player1.playerName
+        else if (currentPlayer == player2) {
+            currentPlayer = player1
         }
     }
 
@@ -21,6 +26,9 @@ const Game = () => {
         return currentPlayer
     }
 
-    return {changePlayerOrder, returnCurrentPlayer}
+    return {changePlayerOrder, returnCurrentPlayer, initializeGame}
 }
+
+const game = Game()
+game.initializeGame()
 
