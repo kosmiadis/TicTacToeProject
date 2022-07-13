@@ -7,7 +7,7 @@ const GameBoard = (() => {
     ]
 
     const createBoxes = () => {
-        let box 
+        let box
         for (let j=1; j<=gameBoard.length; j++) {
             box = document.createElement('div')
             box.classList.add('box')
@@ -18,19 +18,26 @@ const GameBoard = (() => {
             htmlBoard.appendChild(box)
             
         }
+        
         const addEventToBox = (e) => {
             if (e.target.innerText == '') {
-                e.target.innerText = currentPlayer.symbol
+                console.log(e.target.innerHTML)
+                e.target.textContent = currentPlayer.symbol
                 game.changePlayerOrder(player1, player2)
+                GameBoard.updateGameBoard()
             }
         }
+        
     }
 
-    const updateGameBoard = () => {
+    const updateGameBoard = () => {  
         for (let i=0; i<=gameBoard.length; i++) {
-            gameBoard.push(htmlBoard.children[i].innerText) 
+            if (htmlBoard.children[i] == undefined) {
+            }
+            else {
+                gameBoard[i] = new Set(htmlBoard.children[i].textContent)
+            }
         }
-        
     }
 
     const clearBoard = () => {
@@ -39,6 +46,7 @@ const GameBoard = (() => {
     }
     
     const checkForWin = (currentPlayer) => {
+
         if (gameBoard[0] == currentPlayer.symbol & gameBoard[1] == currentPlayer.symbol & gameBoard[2] == currentPlayer.symbol) {
 
         }

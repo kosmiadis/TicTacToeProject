@@ -1,0 +1,176 @@
+[33mcommit 68a05ccc470047ac88f0d9ffc3c6cd8cf36af4a5[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: VagelisKosmiadis <vageliskosmiadis@gmail.com>
+Date:   Tue Jul 12 09:50:12 2022 +0300
+
+    Added new Lines
+
+[1mdiff --git a/JS/board.js b/JS/board.js[m
+[1mindex 45619b2..9d3f997 100644[m
+[1m--- a/JS/board.js[m
+[1m+++ b/JS/board.js[m
+[36m@@ -1,31 +1,66 @@[m
+ const GameBoard = (() => {[m
+[32m+[m[41m    [m
+     const gameBoard = [[m
+         [],[],[],[m
+         [],[],[],[m
+         [],[],[][m
+     ][m
+ [m
+[31m-    const updateGameBoard = (board) => {[m
+[31m-        for (let i=0; i<=board.length; i++) {[m
+[31m-            for (let j=0; j<=gameBoard[i].length; j++) {[m
+[31m-                gameBoard[i][j] = board[i].textContent[m
+[32m+[m[32m    const createBoxes = () => {[m
+[32m+[m[32m        let box[m[41m [m
+[32m+[m[32m        for (let j=1; j<=gameBoard.length; j++) {[m
+[32m+[m[32m            box = document.createElement('div')[m
+[32m+[m[32m            box.classList.add('box')[m
+[32m+[m[32m            box.classList.add('box' + j)[m
+[32m+[m[32m            box.addEventListener('click', e => {[m
+[32m+[m[32m                addEventToBox(e)[m
+[32m+[m[32m            })[m
+[32m+[m[32m            htmlBoard.appendChild(box)[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m
+[32m+[m[32m        const addEventToBox = (e) => {[m
+[32m+[m[32m            if (e.target.innerText == '') {[m
+[32m+[m[32m                e.target.innerText = currentPlayer.symbol[m
+[32m+[m[32m                game.changePlayerOrder(player1, player2)[m
+             }[m
+         }[m
+     }[m
+ [m
+[32m+[m[32m    const updateGameBoard = () => {[m
+[32m+[m[32m        for (let i=0; i<=gameBoard.length; i++) {[m
+[32m+[m[32m            gameBoard.push(htmlBoard.children[i].innerText)[m[41m [m
+[32m+[m[32m        }[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m
+[32m+[m
+     const clearBoard = () => {[m
+[31m-        console.log(gameBoard)[m
+[31m-        gameBoard.forEach(row => row.forEach(box => box = null))[m
+[31m-        console.log(gameBoard)[m
+[32m+[m[32m        gameBoard.forEach(box => box.splice(0))[m
+[32m+[m[32m        updateGameBoard(htmlBoard)[m
+     }[m
+     [m
+[31m-    const checkForWin = () => {[m
+[31m-    [m
+[31m-    }[m
+[32m+[m[32m    const checkForWin = (currentPlayer) => {[m
+[32m+[m[32m        if (gameBoard[0] == currentPlayer.symbol & gameBoard[1] == currentPlayer.symbol & gameBoard[2] == currentPlayer.symbol) {[m
+ [m
+[32m+[m[32m        }[m
+[32m+[m[32m        if (gameBoard[3] == currentPlayer.symbol & gameBoard[4] == currentPlayer.symbol & gameBoard[5] == currentPlayer.symbol) {[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m[41m  [m
+[32m+[m[32m        if (gameBoard[6] == currentPlayer.symbol & gameBoard[7] == currentPlayer.symbol & gameBoard[8] == currentPlayer.symbol) {[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m[41m [m
+ [m
+[31m-    return {[m
+[31m-        clearBoard,[m
+[31m-        updateGameBoard[m
+[32m+[m[32m        if (gameBoard[0] == currentPlayer.symbol & gameBoard[3] == currentPlayer.symbol & gameBoard[6] == currentPlayer.symbol) {[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m[41m [m
+[32m+[m[32m        if (gameBoard[1] == currentPlayer.symbol & gameBoard[4] == currentPlayer.symbol & gameBoard[7] == currentPlayer.symbol) {[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m[41m [m
+[32m+[m[32m        if (gameBoard[2] == currentPlayer.symbol & gameBoard[5] == currentPlayer.symbol & gameBoard[8] == currentPlayer.symbol) {[m
+[32m+[m[41m            [m
+[32m+[m[32m        }[m[41m    [m
+     }[m
+[31m-})()[m
+[32m+[m
+[32m+[m[32m    return {clearBoard,updateGameBoard,createBoxes,checkForWin}[m
+[32m+[m[32m})();[m
+[41m+[m
+[41m+[m
+[1mdiff --git a/JS/main.js b/JS/main.js[m
+[1mindex 0479c11..6070780 100644[m
+[1m--- a/JS/main.js[m
+[1m+++ b/JS/main.js[m
+[36m@@ -1,19 +1,24 @@[m
+ const player1 = Player('Player1', 'X')[m
+ const player2 = Player('Player2', 'O')[m
+[32m+[m[32mvar currentPlayer = player1[m
+[32m+[m[32mconst htmlBoard = document.querySelector('.board')[m
+[32m+[m[41m    [m
+ [m
+ const Game = () => {[m
+     [m
+     [m
+[31m-    var currentPlayer = player1.playerName[m
+[31m-    const board = document.querySelector('.board')[m
+[31m-    GameBoard.clearBoard(board)[m
+[31m-    GameBoard.updateGameBoard(board)[m
+[32m+[m[32m    const initializeGame = () => {[m
+[32m+[m[32m        GameBoard.createBoxes ()[m
+[32m+[m[32m        GameBoard.clearBoard()[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m[41m    [m
+[32m+[m
+     const changePlayerOrder = (player1, player2) => {[m
+[31m-        if (currentPlayer == player1.playerName) {[m
+[31m-            currentPlayer = player2.playerName[m
+[32m+[m[32m        if (currentPlayer == player1) {[m
+[32m+[m[32m            currentPlayer = player2[m
+         }[m
+[31m-        else if (currentPlayer == player2.playerName) {[m
+[31m-            currentPlayer = player1.playerName[m
+[32m+[m[32m        else if (currentPlayer == player2) {[m
+[32m+[m[32m            currentPlayer = player1[m
+         }[m
+     }[m
+ [m
+[36m@@ -21,6 +26,9 @@[m [mconst Game = () => {[m
+         return currentPlayer[m
+     }[m
+ [m
+[31m-    return {changePlayerOrder, returnCurrentPlayer}[m
+[32m+[m[32m    return {changePlayerOrder, returnCurrentPlayer, initializeGame}[m
+ }[m
+ [m
+[32m+[m[32mconst game = Game()[m
+[32m+[m[32mgame.initializeGame()[m
+[32m+[m
+[1mdiff --git a/JS/players.js b/JS/players.js[m
+[1mindex 0bc6716..987350a 100644[m
+[1m--- a/JS/players.js[m
+[1m+++ b/JS/players.js[m
+[36m@@ -1,8 +1,9 @@[m
+ const Player = (name, symbol) => {[m
+     const playerName = name[m
+[32m+[m
+     const placeSymbol = (box) => {[m
+         box.textContent = symbol[m
+     }[m
+[31m-    return {playerName,placeSymbol}[m
+[32m+[m[32m    return {playerName,placeSymbol ,symbol}[m
+ }[m
+ [m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex 477cb2d..5c369f4 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -12,15 +12,8 @@[m
+         <p><span id="curr-player">X</span> Plays</p>[m
+ [m
+         <div class="board">[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[31m-            <div class="box"></div>[m
+[32m+[m[41m            [m
+[32m+[m[41m            [m
+         </div>    [m
+     </body>[m
+ [m
