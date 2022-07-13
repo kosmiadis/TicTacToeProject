@@ -4,7 +4,6 @@ const Player = (name, symbol) => {
     const placeSymbol = (box) => {
         box.textContent = symbol
     }
-    
     return {playerName,placeSymbol ,symbol}
 }
 

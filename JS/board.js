@@ -1,5 +1,5 @@
 const GameBoard = (() => {
-    
+
     const gameBoard = [
         [],[],[],
         [],[],[],
@@ -16,15 +16,14 @@ const GameBoard = (() => {
                 addEventToBox(e)
             })
             htmlBoard.appendChild(box)
-            
         }
         
         const addEventToBox = (e) => {
             if (e.target.innerText == '') {
-                console.log(e.target.innerHTML)
-                e.target.textContent = currentPlayer.symbol
+                currentPlayer.placeSymbol(e.target)
                 game.changePlayerOrder(player1, player2)
                 GameBoard.updateGameBoard()
+                
             }
         }
         
@@ -48,7 +47,7 @@ const GameBoard = (() => {
     const checkForWin = (currentPlayer) => {
 
         if (gameBoard[0] == currentPlayer.symbol & gameBoard[1] == currentPlayer.symbol & gameBoard[2] == currentPlayer.symbol) {
-
+            currentPlayerSpan.textContent = currentPlayerP.symbol + 'Won!'
         }
         if (gameBoard[3] == currentPlayer.symbol & gameBoard[4] == currentPlayer.symbol & gameBoard[5] == currentPlayer.symbol) {
             

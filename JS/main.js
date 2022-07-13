@@ -3,14 +3,19 @@ const player2 = Player('Player2', 'O')
 var currentPlayer = player1
 const htmlBoard = document.querySelector('.board')
 const currentPlayerSpan = document.querySelector('#curr-player')
+const currentPlayerP = document.querySelector('p')
 
 const Game = () => {
     
-
     const initializeGame = () => {
         GameBoard.createBoxes ()
         GameBoard.updateGameBoard()
     }    
+
+    const reinitializeGame = () => {
+        GameBoard.clearBoard()
+        GameBoard.updateGameBoard()    
+    }
 
     const changePlayerOrder = (player1, player2) => {
 

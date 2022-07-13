@@ -1,5 +1,10 @@
 div.board {
-    margin-top: 4em;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    margin-top: 3em;
     width: 300px;
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -10,7 +15,6 @@ div.board {
         background-color: beige;
         width: 100%;
         height: 100px;
-        border: 1px solid;
         display: flex;
         flex-direction: row;
         justify-content: center;

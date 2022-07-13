@@ -1,5 +1,21 @@
 body {
+    
     * {
         font-family: 'Lato';
+    }
+    & div.names-fill-container {
+        padding: 1em 2em;
+        padding-bottom: 3em;
+    }
+    & p {
+        font-size: 2.5em;
+        font-weight: 500;
+        color: lightcoral;
+
+    }
+
+    & div.board {
+        background-color: lightcoral;
+        gap: 1px;
     }
 }
