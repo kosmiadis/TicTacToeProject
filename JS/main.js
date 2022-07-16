@@ -1,18 +1,30 @@
-const player1 = Player('Player1', 'X')
-const player2 = Player('Player2', 'O')  
-var currentPlayer = player1
-const htmlBoard = document.querySelector('.board')
-const currentPlayerSpan = document.querySelector('#curr-player')
-const currentPlayerP = document.querySelector('p')
+let player1  
+let player2 
+var currentPlayer
+let currentPlayerP
+
+const fillNames = document.querySelector('.names-fill-container')
 
 const Game = () => {
+    const playBtn = document.querySelector('#play-btn')
+
+    currentPlayerP = document.querySelector('#curr-player')
     
+
     const initializeGame = () => {
+        currentPlayer = player1
+        fillNames.style.opacity = '0'
+        setTimeout(function () {
+            fillNames.style.visibility = 'none'
+            fillNames.style.display = 'none'
+        }, 300)
+        currentPlayerP.textContent = currentPlayer.name + "'s" + ' turn'
         GameBoard.createBoxes ()
         GameBoard.updateGameBoard()
     }    
 
     const reinitializeGame = () => {
+        currentPlayer = player1
         GameBoard.clearBoard()
         GameBoard.updateGameBoard()    
     }
@@ -25,17 +37,21 @@ const Game = () => {
         else if (currentPlayer == player2) {
             currentPlayer = player1
         }
-        currentPlayerSpan.textContent = currentPlayer.symbol
-        
+        currentPlayerP.textContent = currentPlayer.name + "'s" + ' turn'
     }
 
-    const returnCurrentPlayer = () => {
-        return currentPlayer
-    }
+    playBtn.addEventListener('click', e => {
+        player1 = Player(document.querySelector('#player1-name').value, 'X')
+        player2 =  Player(document.querySelector('#player2-name').value, 'O') 
+        currentPlayer = player1
+        game.initializeGame()
+    
+    })
 
-    return {changePlayerOrder, returnCurrentPlayer, initializeGame}
+    return {changePlayerOrder, initializeGame}
 }
 
 const game = Game()
-game.initializeGame()
+
+
 
