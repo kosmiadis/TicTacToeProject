@@ -2,11 +2,14 @@
 const GameBoard = (() => {
 
     const htmlBoard = document.querySelector('.board')
+
     const gameBoard = [
         [],[],[],
         [],[],[],
         [],[],[]
     ]
+
+    let emptyBoxes = 9
 
     const createBoxes = () => {
         let box
@@ -26,7 +29,7 @@ const GameBoard = (() => {
                 GameBoard.updateGameBoard()
                 checkForWin(currentPlayer)
                 game.changePlayerOrder(player1, player2)
-                console.log(gameBoard)
+                emptyBoxes--
                 
                 
             }
@@ -46,7 +49,7 @@ const GameBoard = (() => {
     }
 
     const clearBoard = () => {
-        gameBoard.forEach(box => box.delete('Symbol'))
+        gameBoard.forEach(box => box.delete('Symbol')) 
         updateGameBoard(htmlBoard)
         for (let i=0; i<=htmlBoard.length; i++) {
             if (htmlBoard[i] == undefined) {
@@ -59,37 +62,64 @@ const GameBoard = (() => {
     }
     
     const checkForWin = (currentPlayer) => {
-        
-        gameBoard.forEach(box => box.get('Symbol'))
-        if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[2].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame()  
+        let win = false
+        if (emptyBoxes > 0) {
+            if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[2].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                console.log(htmlBoard[0],htmlBoard[1],htmlBoard[2])
+                htmlBoard[0].style.color = 'green'
+                htmlBoard[1].style.color = 'green'
+                htmlBoard[2].style.color = 'green'
+                
+                game.reinitializeGame()  
+                win = true
+            }
+            else if (gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                htmlBoard[3].style.color = 'green'
+                htmlBoard[4].style.color = 'green'
+                htmlBoard[5].style.color = 'green'
+                game.reinitializeGame() 
+                win = true
+            }  
+            else if (gameBoard[6].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                htmlBoard[6].style.color = 'green'
+                htmlBoard[7].style.color = 'green'
+                htmlBoard[8].style.color = 'green'
+                game.reinitializeGame() 
+                win = true
+            } 
+            else if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[6].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                htmlBoard[0].style.color = 'green'
+                htmlBoard[3].style.color = 'green'
+                htmlBoard[6].style.color = 'green'
+                game.reinitializeGame()
+                win = true 
+            } 
+            else if (gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                htmlBoard[1].style.color = 'green'
+                htmlBoard[4].style.color = 'green'
+                htmlBoard[7].style.color = 'green'
+                game.reinitializeGame()
+                win = true 
+            } 
+            else if (gameBoard[2].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
+                currentPlayerP.textContent = currentPlayer.name + ' Won!'
+                htmlBoard[2].style.color = 'green'
+                htmlBoard[5].style.color = 'green'
+                htmlBoard[8].style.color = 'green'
+                game.reinitializeGame()
+                win = true 
+            }
+        } 
+        else if (emptyBoxes == 0 && win==false) {
+            
+            gameBoard.clearBoard()
         }
-        else if (gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame() 
-        }  
-        else if (gameBoard[6].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame() 
-        } 
-
-        else if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[6].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame() 
-        } 
-        else if (gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame() 
-        } 
-        else if (gameBoard[2].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
-            currentPlayerP.textContent = currentPlayer.name + 'Won!'
-            game.reinitializeGame() 
-        }    
-
-        
     }
-
     return {clearBoard,updateGameBoard,createBoxes,checkForWin}
 })();
 
