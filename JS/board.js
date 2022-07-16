@@ -60,28 +60,29 @@ const GameBoard = (() => {
     
     const checkForWin = (currentPlayer) => {
         
-        if (gameBoard[0]['Symbol'] == currentPlayer.symbol & gameBoard[1]['Symbol'] == currentPlayer.symbol & gameBoard[2]['Symbol'] == currentPlayer.symbol) {
+        gameBoard.forEach(box => box.get('Symbol'))
+        if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[2].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame()  
         }
-        else if (gameBoard[3] == currentPlayer.symbol & gameBoard[4] == currentPlayer.symbol & gameBoard[5] == currentPlayer.symbol) {
+        else if (gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         }  
-        else if (gameBoard[6] == currentPlayer.symbol & gameBoard[7] == currentPlayer.symbol & gameBoard[8] == currentPlayer.symbol) {
+        else if (gameBoard[6].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         } 
 
-        else if (gameBoard[0] == currentPlayer.symbol & gameBoard[3] == currentPlayer.symbol & gameBoard[6] == currentPlayer.symbol) {
+        else if (gameBoard[0].get('Symbol') == currentPlayer.symbol & gameBoard[3].get('Symbol') == currentPlayer.symbol & gameBoard[6].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         } 
-        else if (gameBoard[1] == currentPlayer.symbol & gameBoard[4] == currentPlayer.symbol & gameBoard[7] == currentPlayer.symbol) {
+        else if (gameBoard[1].get('Symbol') == currentPlayer.symbol & gameBoard[4].get('Symbol') == currentPlayer.symbol & gameBoard[7].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         } 
-        else if (gameBoard[2] == currentPlayer.symbol & gameBoard[5] == currentPlayer.symbol & gameBoard[8] == currentPlayer.symbol) {
+        else if (gameBoard[2].get('Symbol') == currentPlayer.symbol & gameBoard[5].get('Symbol') == currentPlayer.symbol & gameBoard[8].get('Symbol') == currentPlayer.symbol) {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         }    
