@@ -86,6 +86,8 @@ const GameBoard = (() => {
             currentPlayerP.textContent = currentPlayer.name + 'Won!'
             game.reinitializeGame() 
         }    
+
+        
     }
 
     return {clearBoard,updateGameBoard,createBoxes,checkForWin}

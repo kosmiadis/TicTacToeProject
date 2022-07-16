@@ -51,7 +51,7 @@ const Game = () => {
     return {changePlayerOrder, initializeGame}
 }
 
-const game = Game()
+let game = Game()
 document.addEventListener('touchmove', function(e) {e.preventDefault()}, {passive:false});
 
 
